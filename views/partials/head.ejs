@@ -1,0 +1,161 @@
+<style>
+  /* General Reset */
+
+  .navbar {
+    background-color: #0f172a;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .navbar-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #f8fafc;
+  }
+
+  .navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+  }
+
+  .navbar-menu a {
+    text-decoration: none;
+    color: #f1f5f9;
+    font-size: 1rem;
+    transition: color 0.3s;
+  }
+
+  .navbar-menu a:hover {
+    color: #38bdf8;
+  }
+
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .btn {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .login-btn {
+    background-color: #1d4ed8;
+    color: #fff;
+  }
+
+  .login-btn:hover {
+    background-color: #2563eb;
+  }
+
+  .signout-btn {
+    background-color: #dc2626;
+    color: #fff;
+  }
+
+  .signout-btn:hover {
+    background-color: #ef4444;
+  }
+
+  .profile-pic-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hamburger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .hamburger-menu span {
+    width: 25px;
+    height: 3px;
+    background-color: #f8fafc;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .navbar-menu {
+      display: none;
+      flex-direction: column;
+      background-color: #0f172a;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 100%;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .navbar-menu.active {
+      display: flex;
+    }
+
+    .hamburger-menu {
+      display: flex;
+    }
+  }
+</style>
+
+<nav class="navbar">
+  <div class="navbar-container">
+    <a href="#" class="navbar-logo">TechBlog</a>
+    <ul class="navbar-menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <button class="btn login-btn">Login</button>
+      <button class="btn signout-btn">Sign Out</button>
+      <div class="profile-pic-container">
+        <img src="profile-placeholder.jpg" alt="Profile" class="profile-pic" />
+      </div>
+    </div>
+    <div class="hamburger-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburgerMenu = document.querySelector(".hamburger-menu");
+  const navbarMenu = document.querySelector(".navbar-menu");
+
+  hamburgerMenu.addEventListener("click", () => {
+    navbarMenu.classList.toggle("active");
+  });
+</script>
