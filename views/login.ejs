@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login User Form</title>
+    <title>Login Form</title>
     <style>
       * {
         margin: 0;
@@ -13,7 +13,7 @@
 
       body {
         font-family: Arial, sans-serif;
-        background-color: #f9f9f9;
+        background-color: #f4f4f9;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -22,41 +22,41 @@
 
       .form-container {
         background-color: #ffffff;
-        padding: 20px 30px;
+        padding: 30px 40px;
         border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         width: 100%;
         max-width: 400px;
       }
 
       h1 {
         text-align: center;
-        margin-bottom: 20px;
         color: #333;
+        margin-bottom: 20px;
       }
 
       .form-group {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
       }
 
       label {
         display: block;
-        margin-bottom: 5px;
-        color: #555;
+        margin-bottom: 8px;
+        font-size: 16px;
         font-weight: bold;
+        color: #555;
       }
 
-      input,
-      select {
+      input {
         width: 100%;
         padding: 10px;
         border: 1px solid #ddd;
         border-radius: 5px;
         font-size: 16px;
+        transition: border-color 0.3s;
       }
 
-      input:focus,
-      select:focus {
+      input:focus {
         border-color: #007bff;
         outline: none;
       }
@@ -65,7 +65,7 @@
         width: 100%;
         background-color: #007bff;
         color: white;
-        padding: 10px;
+        padding: 12px;
         font-size: 16px;
         font-weight: bold;
         border: none;
@@ -77,29 +77,12 @@
       button.submit-btn:hover {
         background-color: #0056b3;
       }
-      .error {
-        display: flex;
-        margin: auto;
-        color: red;
-        font-size: 1.5rem;
-        text-align: center;
-      }
     </style>
   </head>
   <body>
     <div class="form-container">
-      <h1>Login User Form</h1>
-      <form action="/user/submit" method="POST">
-        <div class="form-group">
-          <label for="userName">User Name</label>
-          <input
-            type="text"
-            id="userName"
-            name="userName"
-            placeholder="Enter your name"
-          />
-        </div>
-
+      <h1>Login</h1>
+      <form action="/user/login" method="POST">
         <div class="form-group">
           <label for="userMobile">Mobile Number</label>
           <input
@@ -107,6 +90,7 @@
             id="userMobile"
             name="userMobile"
             placeholder="Enter your mobile number"
+            required
           />
         </div>
 
@@ -117,33 +101,12 @@
             id="userPassword"
             name="userPassword"
             placeholder="Enter your password"
+            required
           />
         </div>
 
-        <!-- <div class="form-group">
-          <label for="profilImage">Profile Image</label>
-          <input
-            type="file"
-            id="profilImage"
-            name="profilImage"
-            accept="image/*"
-          />
-        </div> -->
-
-        <div class="form-group">
-          <label for="role">Role</label>
-          <select id="role" name="role">
-            <option value="USER">User</option>
-            <option value="ADMIN">Admin</option>
-          </select>
-        </div>
-
-        <button type="submit" class="submit-btn">Submit</button>
+        <button type="submit" class="submit-btn">Login</button>
       </form>
-
-      <% if (locals.error) { %>
-      <div class="error"><%= error %></div>
-      <% } %>
     </div>
   </body>
 </html>

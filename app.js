@@ -14,8 +14,8 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   res.render("home");
 });
-app.use("/user", SignupRouter);
 
+app.use("/user", SignupRouter);
 app.listen(PORT, () => {
   console.log(`server is running on port number ${PORT}`);
 });

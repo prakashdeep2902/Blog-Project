@@ -8,9 +8,9 @@ const LoginUserSchema = new mongoose.Schema(
       required: true,
     },
     userMobile: {
-      type: Number,
+      type: String,
       required: true,
-      sparse: true,
+      unique: true, // Enforce uniqueness in MongoDB
     },
     userPassword: {
       type: String,
@@ -18,10 +18,6 @@ const LoginUserSchema = new mongoose.Schema(
     },
     salt: {
       type: String,
-    },
-    profileImage: {
-      type: String,
-      default: "/images/default_profile-removebg-preview.png",
     },
     role: {
       type: String,
@@ -35,29 +31,21 @@ const LoginUserSchema = new mongoose.Schema(
 // Pre-save hook to hash the password
 LoginUserSchema.pre("save", function (next) {
   const user = this;
-
-  console.log(user);
-
-  // Skip hashing if the password is not modified
+  // Only hash the password if it's new or modified
   if (!user.isModified("userPassword")) return next();
-
   try {
-    // Generate a salt
     const salt = randomBytes(16).toString("hex");
     user.salt = salt;
-
-    // Hash the password using the salt
     const hashedPassword = createHmac("sha256", salt)
       .update(user.userPassword)
       .digest("hex");
     user.userPassword = hashedPassword;
 
-    next(); // Proceed to save the document
+    next();
   } catch (err) {
-    next(err); // Pass errors to the next middleware
+    next(err);
   }
 });
 
 const SignupUsers = mongoose.model("SignupUser", LoginUserSchema);
-
 export default SignupUsers;
