@@ -1,4 +1,4 @@
-import SignupUsers from "../models/SignupUserModel.js";
+import SignupUsers from "../models/UserModel.js";
 
 async function getUserSignup(req, res) {
   try {

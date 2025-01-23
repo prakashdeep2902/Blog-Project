@@ -4,7 +4,7 @@ import {
   HandleUserSignup,
   getLoginPage,
   HandleLoginUser,
-} from "../controllers/SignupUsersControllers.js";
+} from "../controllers/UsersControllers.js";
 const router = express.Router();
 
 router.get("/signup", getUserSignup);

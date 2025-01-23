@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-import SignupRouter from "./routes/SignupUserRouter.js";
+import UsersRoutes from "./routes/UsersRoutes.js";
 import mongoose from "./DbConnection/local.js";
 const app = express();
 const PORT = 8000;
@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.use("/user", SignupRouter);
+app.use("/user", UsersRoutes);
 app.listen(PORT, () => {
   console.log(`server is running on port number ${PORT}`);
 });
