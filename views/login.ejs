@@ -77,6 +77,15 @@
       button.submit-btn:hover {
         background-color: #0056b3;
       }
+      .error {
+        display: flex;
+        margin: auto;
+        color: red;
+        font-size: 1.5rem;
+        justify-content: center;
+        text-align: center;
+        margin-top: 1rem;
+      }
     </style>
   </head>
   <body>
@@ -90,7 +99,6 @@
             id="userMobile"
             name="userMobile"
             placeholder="Enter your mobile number"
-            required
           />
         </div>
 
@@ -101,12 +109,15 @@
             id="userPassword"
             name="userPassword"
             placeholder="Enter your password"
-            required
           />
         </div>
 
         <button type="submit" class="submit-btn">Login</button>
       </form>
+
+      <% if (locals.error) { %>
+      <div class="error"><%= error %></div>
+      <% } %>
     </div>
   </body>
 </html>

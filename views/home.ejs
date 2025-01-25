@@ -18,6 +18,8 @@
     </style>
   </head>
   <body>
-    <%- include('./partials/head.ejs') %>
+    <%- include('./partials/head.ejs') %> <% if (locals.userData) { %>
+    <div class="user-info">Welcome, <%= userData.userName || "User" %>!</div>
+    <% } %>
   </body>
 </html>

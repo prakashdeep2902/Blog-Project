@@ -1,4 +1,4 @@
-import SignupUsers from "../models/UserModel.js";
+import SignupUsers, { matchPass } from "../models/UserModel.js";
 
 async function getUserSignup(req, res) {
   try {
@@ -38,7 +38,7 @@ async function HandleUserSignup(req, res) {
     await alldetails.save();
 
     // Redirect to the home page
-    res.status(201).redirect("/");
+    res.status(201).redirect("login");
   } catch (error) {
     // Handle duplicate key error (code 11000)
 
@@ -67,10 +67,28 @@ async function getLoginPage(req, res) {
 
 async function HandleLoginUser(req, res) {
   try {
-    res.render("login");
+    const { userMobile, userPassword } = req.body;
+    if (!userMobile || !userPassword) {
+      const error = new Error("userMobile and userPassword are required");
+      error.status = 400; // Use 400 for bad requests
+      throw error;
+    }
+    const { isPassMatch, userData } = await matchPass(userMobile, userPassword);
+
+    if (!isPassMatch) {
+      return res.status(401).render("login", { error: "Invalid credentials" });
+    }
+
+    console.log(userData);
+    res.render("home", {
+      userData,
+    });
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred while rendering the signup page");
+    const statusCode = error.status || 500;
+    res.status(statusCode).render("login", {
+      error: error.message,
+    });
   }
 }
 
