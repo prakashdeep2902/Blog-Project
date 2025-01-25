@@ -73,16 +73,13 @@ async function HandleLoginUser(req, res) {
       error.status = 400; // Use 400 for bad requests
       throw error;
     }
-    const { isPassMatch, userData } = await matchPass(userMobile, userPassword);
+    const { token, isPassMatch } = await matchPass(userMobile, userPassword);
 
     if (!isPassMatch) {
       return res.status(401).render("login", { error: "Invalid credentials" });
     }
 
-    console.log(userData);
-    res.render("home", {
-      userData,
-    });
+    res.cookie("token", token).redirect("/");
   } catch (error) {
     console.error(error);
     const statusCode = error.status || 500;

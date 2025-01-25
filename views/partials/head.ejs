@@ -1,143 +1,122 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <!-- Logo -->
+  <div class="logo">
+    <a href="/">
+      <img src="/path-to-your-logo/logo.png" alt="Website Logo" />
+    </a>
+  </div>
+
+  <!-- Profile and Authentication -->
+  <div class="auth">
+    <% if (locals.user) { %>
+    <!-- If user is logged in -->
+    <div class="user-info">
+      <p><%= user.name %></p>
+      <a href="/logout" class="signout-btn">Sign Out</a>
+    </div>
+    <% } else { %>
+    <!-- If user is not logged in -->
+    <div class="profile-pic">
+      <img
+        src="/path-to-default-profile-image/default-avatar.png"
+        alt="Profile"
+        onclick="toggleLoginSignup()"
+      />
+    </div>
+    <% } %>
+  </div>
+</nav>
+
+<!-- Optional Login/Signup Modal (hidden by default) -->
+<div id="login-signup-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div class="login-signup-form">
+      <h2>Login</h2>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Function to show the login/signup modal
+  function toggleLoginSignup() {
+    window.open("http://localhost:8000/user/login");
+  }
+
+  // Close modal when clicked outside or on close button
+  function closeModal() {
+    document.getElementById("login-signup-modal").style.display = "none";
+  }
+
+  // Close modal on clicking anywhere outside the modal content
+  window.onclick = function (event) {
+    if (event.target == document.getElementById("login-signup-modal")) {
+      closeModal();
+    }
+  };
+</script>
+
+<!-- CSS for styling -->
 <style>
-  /* General Reset */
-
   .navbar {
-    background-color: #0f172a;
-    color: #fff;
-    padding: 0.8rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-
-  .navbar-container {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
   }
-
-  .navbar-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: #f8fafc;
+  .logo img {
+    width: 100px;
   }
-
-  .navbar-menu {
-    display: flex;
-    list-style: none;
-    gap: 1.5rem;
-  }
-
-  .navbar-menu a {
-    text-decoration: none;
-    color: #f1f5f9;
-    font-size: 1rem;
-    transition: color 0.3s;
-  }
-
-  .navbar-menu a:hover {
-    color: #38bdf8;
-  }
-
-  .navbar-actions {
+  .auth {
     display: flex;
     align-items: center;
-    gap: 1rem;
   }
-
-  .btn {
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+  .auth .user-info p {
+    margin-right: 20px;
   }
-
-  .login-btn {
-    background-color: #1d4ed8;
-    color: #fff;
-  }
-
-  .login-btn:hover {
-    background-color: #2563eb;
-  }
-
-  .signout-btn {
-    background-color: #dc2626;
-    color: #fff;
-  }
-
-  .signout-btn:hover {
-    background-color: #ef4444;
-  }
-
-  .profile-pic-container {
+  .profile-pic img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    overflow: hidden;
-  }
-
-  .profile-pic {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hamburger-menu {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
     cursor: pointer;
   }
-
-  .hamburger-menu span {
-    width: 25px;
-    height: 3px;
-    background-color: #f8fafc;
+  .signout-btn {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
   }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .navbar-menu {
-      display: none;
-      flex-direction: column;
-      background-color: #0f172a;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      width: 100%;
-      gap: 1rem;
-      padding: 1rem;
-    }
-
-    .navbar-menu.active {
-      display: flex;
-    }
-
-    .hamburger-menu {
-      display: flex;
-    }
+  /* Modal styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+  }
+  .close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close-btn:hover,
+  .close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
   }
 </style>
-
-<nav class="navbar">
-  <div class="navbar-container">
-    <a href="#" class="navbar-logo">TechBlog</a>
-
-    <div class="navbar-actions">
-      <button class="btn login-btn">Login</button>
-      <button class="btn signout-btn">Sign Out</button>
-      <div class="profile-pic-container">
-        <img src="" alt="Profile" class="profile-pic" />
-      </div>
-    </div>
-  </div>
-</nav>

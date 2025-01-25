@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { error } from "node:console";
 import { randomBytes, createHmac } from "node:crypto";
+import { createTokenForUser } from "../utils/authentication.js";
 
 const LoginUserSchema = new mongoose.Schema(
   {
@@ -66,7 +67,8 @@ export async function matchPass(userMobile, password) {
 
     const isPassMatch = MakeHashedIncomingPass == hashedPass;
 
-    return { isPassMatch, userData };
+    const token = createTokenForUser(userData);
+    return { token, isPassMatch };
   } catch (error) {
     console.error("Error in matchPass:", error);
     throw error; // Re-throw the error for further handling
