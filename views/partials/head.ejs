@@ -3,7 +3,10 @@
   <!-- Logo -->
   <div class="logo">
     <a href="/">
-      <img src="/path-to-your-logo/logo.png" alt="Website Logo" />
+      <img
+        src="https://www.nobroker.in/forum/wp-content/uploads/2020/08/logo.png"
+        alt="Website Logo"
+      />
     </a>
   </div>
 
@@ -13,7 +16,9 @@
     <!-- If user is logged in -->
     <div class="user-info">
       <p><%= user.name %></p>
-      <a href="/logout" class="signout-btn">Sign Out</a>
+      <a href="http://localhost:8000/user/logout" class="signout-btn"
+        >Sign Out</a
+      >
     </div>
     <% } else { %>
     <!-- If user is not logged in -->
@@ -63,8 +68,13 @@
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    background-color: #333;
-    color: white;
+
+    background: #ffffff;
+    position: fixed;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    top: 0;
+    z-index: 9999;
   }
   .logo img {
     width: 100px;
@@ -75,6 +85,9 @@
   }
   .auth .user-info p {
     margin-right: 20px;
+  }
+  .user-info {
+    display: flex;
   }
   .profile-pic img {
     width: 40px;

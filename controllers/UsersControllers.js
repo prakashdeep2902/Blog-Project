@@ -89,4 +89,14 @@ async function HandleLoginUser(req, res) {
   }
 }
 
-export { getUserSignup, HandleUserSignup, getLoginPage, HandleLoginUser };
+async function HandleLogOutUser(req, res) {
+  res.clearCookie("token").redirect("/");
+}
+
+export {
+  getUserSignup,
+  HandleUserSignup,
+  getLoginPage,
+  HandleLoginUser,
+  HandleLogOutUser,
+};
