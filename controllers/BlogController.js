@@ -61,4 +61,23 @@ async function getDetailsOfBlog(req, res) {
   }
 }
 
-export { addBlog, handleAddBlog, upload, getDetailsOfBlog };
+async function HandelCommentS(req, res) {
+  try {
+    const { comment } = req.body;
+    console.log(comment);
+
+    res
+      .status(200)
+      .json({ success: true, message: "Comment received", comment });
+  } catch (error) {
+    console.error("Error adding blog:", error);
+    res
+      .status(500)
+      .json({
+        success: false,
+        error: "Internal Server Error. Please try again later.",
+      });
+  }
+}
+
+export { addBlog, handleAddBlog, upload, getDetailsOfBlog, HandelCommentS };

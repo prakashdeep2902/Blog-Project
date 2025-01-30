@@ -1,5 +1,31 @@
 import mongoose, { Schema } from "mongoose";
 
+const replayScema = new mongoose.Schema(
+  {
+    replay: {
+      type: String,
+      required: true,
+    },
+    createBy: {
+      type: Schema.Types.ObjectId,
+      ref: "SignupUser",
+    },
+  },
+  { timestamps: true }
+);
+
+const CommentSchema = new mongoose.Schema({
+  comment: {
+    type: String,
+    required: true,
+  },
+  createBy: {
+    type: Schema.Types.ObjectId,
+    ref: "SignupUser",
+  },
+  replies: [replayScema],
+});
+
 const BlogSchema = new mongoose.Schema(
   {
     title: {
@@ -18,6 +44,7 @@ const BlogSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "SignupUser",
     },
+    comments: [CommentSchema],
   },
   { timestamps: true }
 );
