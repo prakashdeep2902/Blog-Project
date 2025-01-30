@@ -97,10 +97,13 @@
         </div>
         <div class="AboutCards">
           <h2 class="title"><%= element.title %></h2>
-          <p class="description"><%= element.description %></p>
+          <p class="description">
+            <%= element.description.split(" ").slice(0, 10).join(" ") %>
+          </p>
+
           <button
             class="CardBtn"
-            onclick="window.open('http://localhost:8000/blog/add/<%= element._id %>', '_blank')"
+            onclick="window.open('http://localhost:8000/blog/page/<%= element._id %>', '_blank')"
           >
             Know more
           </button>

@@ -43,4 +43,22 @@ async function handleAddBlog(req, res) {
   }
 }
 
-export { addBlog, handleAddBlog, upload };
+async function getDetailsOfBlog(req, res) {
+  try {
+    const id = req.params.id;
+    const BlogDetails = await blog.findById(id).populate("createdBy");
+    const users = req.user;
+
+    res.render("blog", {
+      user: users,
+      BlogDetails: BlogDetails,
+    });
+  } catch (error) {
+    console.error("Error adding blog:", error);
+    res.status(500).render("addBlog", {
+      error: "Internal Server Error. Please try again later.",
+    });
+  }
+}
+
+export { addBlog, handleAddBlog, upload, getDetailsOfBlog };
