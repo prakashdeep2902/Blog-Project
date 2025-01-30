@@ -15,9 +15,100 @@
       body {
         font-family: Arial, sans-serif;
       }
+
+      /* Cards Container */
+      .CardsContainer {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 5rem;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      /* Individual Card */
+      .cards {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 300px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+      }
+
+      .cards:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Image Container */
+      .imageConatiner img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 1px solid #ddd;
+      }
+
+      /* Card Content */
+      .AboutCards {
+        padding: 15px;
+        text-align: center;
+      }
+
+      .AboutCards .title {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 10px 0;
+        color: #333;
+      }
+
+      .AboutCards .description {
+        font-size: 14px;
+        color: #666;
+        margin: 10px 0;
+        line-height: 1.5;
+      }
+
+      .CardBtn {
+        padding: 10px 20px;
+        font-size: 14px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .CardBtn:hover {
+        background-color: #0056b3;
+      }
     </style>
   </head>
   <body>
     <%- include('./partials/head.ejs') %>
+
+    <div class="CardsContainer">
+      <% if (locals.blogs && locals.blogs.length > 0) { %> <%
+      locals.blogs.forEach(element => { %>
+      <div class="cards">
+        <div class="imageConatiner">
+          <img src="<%= element.coverImage %>" alt="Cover Image" />
+        </div>
+        <div class="AboutCards">
+          <h2 class="title"><%= element.title %></h2>
+          <p class="description"><%= element.description %></p>
+          <button
+            class="CardBtn"
+            onclick="window.open('http://localhost:8000/blog/add/<%= element._id %>', '_blank')"
+          >
+            Know more
+          </button>
+        </div>
+      </div>
+      <% }) %> <% } else { %>
+      <p>No blogs available at the moment.</p>
+      <% } %>
+    </div>
   </body>
 </html>
