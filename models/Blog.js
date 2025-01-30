@@ -23,6 +23,9 @@ const CommentSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "SignupUser",
   },
+  createByName: {
+    type: String, // Changed from Schema.Types.userName to String
+  },
   replies: [replayScema],
 });
 

@@ -63,20 +63,38 @@ async function getDetailsOfBlog(req, res) {
 
 async function HandelCommentS(req, res) {
   try {
+    const id = req.params.id;
     const { comment } = req.body;
-    console.log(comment);
+    console.log(req.user);
+    if (!id || !comment) {
+      return res
+        .status(400)
+        .json({ success: false, error: "Missing blog ID or comment" });
+    }
 
-    res
-      .status(200)
-      .json({ success: true, message: "Comment received", comment });
+    const dataWithcomment = await blog.findByIdAndUpdate(
+      id,
+      {
+        $push: {
+          comments: {
+            comment: comment,
+            createBy: req.user._id,
+            createByName: req.user.name,
+          },
+        },
+      },
+      { new: true }
+    );
+
+    console.log(dataWithcomment);
+
+    res.redirect(`/blog/page/${id}`);
   } catch (error) {
     console.error("Error adding blog:", error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        error: "Internal Server Error. Please try again later.",
-      });
+    res.status(500).json({
+      success: false,
+      error: "Internal Server Error. Please try again later.",
+    });
   }
 }
 

@@ -256,7 +256,11 @@
 
     <section class="commentSection">
       <h2>Leave a Comment</h2>
-      <form class="commentForm" action="/blog/page/comment/" method="post">
+      <form
+        class="commentForm"
+        action="/blog/page/comment/<%=locals.BlogDetails._id%>"
+        method="post"
+      >
         <input
           type="text"
           name="comment"
@@ -266,19 +270,20 @@
         <button type="submit">comment</button>
       </form>
 
-      <!-- <div class="commentList">
-          <div class="comment">
-            <p>
-              <strong>John Doe:</strong> This is an amazing blog! Thanks for
-              sharing.
-            </p>
-          </div>
-          <div class="comment">
-            <p>
-              <strong>Jane Smith:</strong> Very informative and well-written.
-            </p>
-          </div>
-        </div> -->
+      <% if (locals.BlogDetails.comments) { %>
+
+      <div class="commentList">
+        <% locals.BlogDetails.comments.forEach(element => { %>
+
+        <div class="comment">
+          <p>
+            <strong><%= element.createByName %></strong> <%= element.comment %>
+          </p>
+        </div>
+        <% }) %>
+      </div>
+
+      <% } %>
     </section>
   </body>
 </html>
