@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const LocalUrl = "mongodb://localhost:27017/blogTech";
+const LocalUrl = process.env.MONGO_URL;
 
 mongoose
   .connect(LocalUrl)
